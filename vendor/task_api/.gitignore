@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+
+# Git
+.git/
+
+# Virtual environments
+venv/
+.env
+
+# Environment variables
+.env.*
+
+# Docker
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# Postman
+postman/
+*.postman_collection.json
+*.postman_environment.json
+*.postman
+
+# Database stuff
+*.db
