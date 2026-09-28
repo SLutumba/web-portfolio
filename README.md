@@ -67,3 +67,20 @@ The included Dockerfile runs Waitress on port **8080** as a non-root user. A Pyt
 - Enable `TRUST_PROXY=1` only behind exactly one trusted proxy that overwrites forwarding headers and blocks direct access to the application port.
 
 Multiple processes or replicas require shared rate-limit storage and a review of database concurrency.
+
+### Render
+
+`render.yaml` configures a free Python web service in Frankfurt, with a health
+check and a generated signing secret. Create a Render Blueprint from this
+repository to use it. The service serves both the portfolio and the API.
+
+The Render start command configures Waitress to read the last proxy's client IP
+and protocol headers. Leave `TRUST_PROXY` unset to avoid processing those headers
+twice. This command is intended for Render's protected service port, not a server
+directly exposed to the internet.
+
+Free Render services sleep after 15 minutes of inactivity, so an initial visit
+can be slow. Local demo data is temporary and can disappear when the service
+restarts, redeploys or sleeps; visitors can start a fresh workspace. No persistent
+disk or paid resource is configured. An always-on paid instance can be considered
+before sharing the portfolio with recruiters.

@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: shekinah-lutumba-portfolio
+    runtime: python
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: >-
+      waitress-serve --listen=0.0.0.0:8080
+      --trusted-proxy=* --trusted-proxy-count=1
+      --trusted-proxy-headers="x-forwarded-for x-forwarded-proto"
+      server:app
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13.7"
+      - key: PORT
+        value: "8080"
+      - key: JWT_SECRET_KEY
+        generateValue: true
